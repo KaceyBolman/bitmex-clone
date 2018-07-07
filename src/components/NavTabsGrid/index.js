@@ -4,8 +4,7 @@ import GridLayout from 'react-grid-layout';
 import style from './NavTabsGrid.css';
 
 /**
- * Non-responsive grid-layout. Contains a generate layout
- * function. 
+ * Non-responsive grid-layout. Contains functions that generates layouts. 
  */
 class NavTabsGrid extends Component {
 
@@ -21,7 +20,7 @@ class NavTabsGrid extends Component {
 			return (
 				<div key={genKey} className={styles.itemDiv}>
 					<div>
-						<p className={styles.itemText}>{genKey }</p>
+						<p className={styles.itemText}>{genKey}</p>
 				</div>
 				</div>
 			);
@@ -29,7 +28,11 @@ class NavTabsGrid extends Component {
 	}
 
 	/**
+	 * Generates the layout for a 3x3 grid in react-grid-layout. 
 	 * 
+	 * TODO:
+	 * 1. Change the setup parameter to a number. 
+	 * 2. Create logic after the 3x3 logic to generate a 4x4 layout
 	 * @param {*} length Number of objects to be placed in the layout array. 
 	 * @param {*} keyType Determine how the key is generated, whether numerically
 	 * 						or alphabetically.
@@ -41,6 +44,7 @@ class NavTabsGrid extends Component {
 		var counter = 0; 
 
 		while (counter < length) {
+			// enter 3x3 generation logic if user enters it
 			while (setup === "3x3") {
 				if (keyType === "string") {
 					return this.genThreeByThreeLayout(length);
@@ -50,12 +54,23 @@ class NavTabsGrid extends Component {
 					});
 				}
 				counter++;
-			}
+			} 
+			// enter 4x4 generation logic if user enters it
+			while (setup === "4x4") {
+				if (keyType === "string") {
+					return this.genFourByFourLayout(length);
+				} else if (keyType === "number") {
+					return _.map(_.range(0, length), function(index) {
+						return {i: index, x: 0, y: 0, w: 2, h: 2, maxW: 4, mayY: 4};
+					});
+				}
+				counter++;
+			} 
 		}
 	}
 
 	/**
-	 * Generates any layout you want.
+	 * Generates a 3x3 layout. 
 	 * @param {*} length 
 	 */
 	genThreeByThreeLayout(length) {
@@ -78,15 +93,46 @@ class NavTabsGrid extends Component {
 		});
 	}
 
+	/**
+	 * Generate a 4 by 4 layout. 
+	 * @param {*} length 
+	 */
+	genFourByFourLayout(length) {
+		// reset variable to 0
+		var rowCounter = 0;
+		var colCounter = 0;
+
+		// specify the item's width. also keeps track of what row the item is on
+		var itemWidth = 3;
+		// specify the item's height. also keeps track of what col the item is on
+		var itemHeight = 4;
+		return _.map(_.range(0, length), function(index) {
+			if (index % 4 === 0) {
+				rowCounter = 0;
+			}
+			var genKey = String.fromCharCode(97 + index);
+			var result = {i: genKey, x: rowCounter, y: colCounter, w: itemWidth, h: itemHeight, maxW: 4, mayY: 4};
+			rowCounter += itemWidth;
+			colCounter += itemHeight;
+			console.log('rowCounter = ' + rowCounter);
+			console.log('colCounter = ' + colCounter);
+			return result;
+		});
+	}
+
 	
 	
 	render() {
-		var layout = this.genLayout(26, "string", "3x3");
+		// Generate a layout with 26 items, with numerical keys, that is 3x3
+		// var threeByThreeLayout = this.genLayout(26, "string", "3x3");
+
+		// Generate a layout with 26 items, with alphabetical keys, that is 4x4
+		var fourByFourLayout = this.genLayout(26, "string", "4x4");
 		
 		return(
-			<GridLayout className="layout" layout={layout} cols={12}
+			<GridLayout className="layout" layout={fourByFourLayout} cols={12}
 			rowHeight={30} width={1200}>
-				{this.renderLayout(style, layout)}
+				{this.renderLayout(style, fourByFourLayout)}
 			</GridLayout>
 		); 
 	}
