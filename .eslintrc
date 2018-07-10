@@ -1,0 +1,7 @@
+{
+  "extends": "airbnb-base",
+  "plugins": ["eslint-plugin-prettier", "prettier"],
+  "rules": {
+    "prettier/prettier": "error"
+  }
+}

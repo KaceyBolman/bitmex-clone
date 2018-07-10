@@ -1,0 +1,8 @@
+.coinInfo {
+	line-height: 1.2307692308rem;
+}
+
+.navTabActive {
+	border-left-color: #bbb;
+	color: red;
+}
