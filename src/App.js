@@ -2,32 +2,35 @@ import React, {Component} from 'react';
 import GenerateTheLayout from './components/GenLayout/index';
 import QuickNavCoins from './components/QuickNavCoins/index';
 import TestCss from './components/TestCss/index';
-import Example from './components/NavBar/index';
+import NavBar from './components/NavBar/index';
 import DropDownVariation from './components/DropDownVariation/index';
 import MainArea from './components/NavBar/MainArea';
 
 import {Col, Container, Row} from 'reactstrap';
 
+// RGAPI-e61c0eef-4560-43e2-a18e-d14bfdf3ac0bcurl --request GET 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/RiotSchmick?api_key=<key>' --include
+
 class App extends Component {
-  render() {
+  render () {
     return (
       <Container fluid>
         <Row>
+          {' '}
           {/* <DropDownVariation /> */}
-          <Example />
-        </Row>
+          <NavBar />
+        </Row>{' '}
         <Row>
           <Col>
             <MainArea />
-          </Col>
-        </Row>
-        {/* <TestCss>Upload File &nbsp;&nbsp;</TestCss> */}
-        {/* <QuickNavCoins /> */}
+          </Col>{' '}
+        </Row>{' '}
+        {/* <TestCss>Upload File &nbsp;&nbsp;</TestCss> */}{' '}
+        {/* <QuickNavCoins /> */}{' '}
         <Row>
           <Col sm="9">
             <GenerateTheLayout />
-          </Col>
-        </Row>
+          </Col>{' '}
+        </Row>{' '}
       </Container>
     );
   }

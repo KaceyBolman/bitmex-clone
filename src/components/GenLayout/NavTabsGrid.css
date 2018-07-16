@@ -1,3 +1,7 @@
-.firstDiv div{
+.firstDiv div {
 	border-color: red;
+}
+
+.recommended {
+	color: red;
 }
