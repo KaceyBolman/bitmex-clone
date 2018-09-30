@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import App from '../../App';
 import Home from '../Home/Home';
 import Layout from '../Layout/Layout';
+import LocalStorage from '../LocalStorage/LocalStorage';
 import Player from '../Players/Player';
 import QuickNavTabs from '../QuickNavTabs/QuickNavTabs';
-import {Switch, Route} from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 const lma = 1;
 
@@ -14,6 +15,7 @@ const Main = () => (
     <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/layout" component={Layout} />
+      <Route exact path="/localstorage" component={LocalStorage} />
       <Route exact path="/player" render={() => <Player name={lma} />} />
       <Route exact path="/quicknavicons" component={QuickNavTabs} />
     </Switch>

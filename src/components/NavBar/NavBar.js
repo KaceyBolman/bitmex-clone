@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   Collapse,
   Navbar,
@@ -14,9 +14,9 @@ import {
   DropdownItem,
 } from 'reactstrap';
 
-import {Row, Col} from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 
-type MyState = {isOpen: boolean};
+type MyState = { isOpen: boolean };
 class NavBar extends React.Component<{}, MyState> {
   constructor(props) {
     super(props);
@@ -37,8 +37,7 @@ class NavBar extends React.Component<{}, MyState> {
     return (
       <Col>
         <Navbar dark expand="sm" color="dark">
-          <NavbarBrand href="/"> Players </NavbarBrand>{' '}
-          <NavbarToggler onClick={this.toggle} />{' '}
+          <NavbarBrand href="/"> Players </NavbarBrand> <NavbarToggler onClick={this.toggle} />{' '}
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
@@ -71,8 +70,12 @@ class NavBar extends React.Component<{}, MyState> {
                       <Link to="/quicknavicons">Bitmex Top Bar Replica</Link>
                     </NavItem>
                   </DropdownItem>{' '}
-                  <DropdownItem disabled> Disabled :') </DropdownItem>{' '}
-                  <DropdownItem divider />
+                  <DropdownItem>
+                    <NavItem>
+                      <Link to="/localstorage">Local Storage Example</Link>
+                    </NavItem>
+                  </DropdownItem>{' '}
+                  <DropdownItem disabled> Disabled </DropdownItem> <DropdownItem divider />
                   <DropdownItem> Reset </DropdownItem>{' '}
                 </DropdownMenu>{' '}
               </UncontrolledDropdown>{' '}
