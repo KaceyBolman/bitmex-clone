@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from './components/NavBar/NavBar';
 import Main from './components/Main/Main.js';
-
 import { Col, Container, Row } from 'reactstrap';
 
 // RGAPI-e61c0eef-4560-43e2-a18e-d14bfdf3ac0bcurl --request GET 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/RiotSchmick?api_key=<key>' --include

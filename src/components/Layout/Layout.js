@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import PlayerAPI from '../../api';
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import GridLayout from 'react-grid-layout';
 import './NavTabsGrid.css';
 import {
@@ -36,18 +36,11 @@ class Layout extends Component {
       return (
         <div key={genKey}>
           <Col>
-            {/* <div> */}
-            {/* <a href="http://www.google.com">
-                <p>{genKey}</p>
-              </a>
-              <span className="recommended">Recommended</span> */}
             <Card styles={styles.width}>
               <CardBody>
                 <CardTitle>{genKey}</CardTitle>
                 <CardSubtitle>Card substitle</CardSubtitle>
-                <CardText>
-                  Card text Card text Card text Card text Card text.
-                </CardText>
+                <CardText>Card text Card text Card text Card text Card text.</CardText>
                 <Button>Click</Button>
               </CardBody>
             </Card>
@@ -81,7 +74,7 @@ class Layout extends Component {
           return this.genThreeByThreeLayout(length);
         } else if (keyType === 'number') {
           return _.map(_.range(0, length), function(index) {
-            return {i: index, x: 0, y: 0, w: 2, h: 2, maxW: 4, mayY: 4};
+            return { i: index, x: 0, y: 0, w: 2, h: 2, maxW: 4, mayY: 4 };
           });
         }
         counter++;
@@ -92,7 +85,7 @@ class Layout extends Component {
           return this.genFourByFourLayout(length);
         } else if (keyType === 'number') {
           return _.map(_.range(0, length), function(index) {
-            return {i: index, x: 0, y: 0, w: 2, h: 2, maxW: 4, mayY: 4};
+            return { i: index, x: 0, y: 0, w: 2, h: 2, maxW: 4, mayY: 4 };
           });
         }
         counter++;

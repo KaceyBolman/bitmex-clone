@@ -41,15 +41,16 @@ class NavBar extends React.Component<{}, MyState> {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                {/* <NavLink href="/components/"> Components </NavLink>{' '} */}
                 <NavLink>
                   <Link to="/">Home</Link>
                 </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink>
+                  <Link to="/symbols">Select Symbols</Link>
+                </NavLink>
               </NavItem>{' '}
               <NavItem>
-                {/* <NavLink href="https://github.com/reactstrap/reactstrap">
-                  GitHub{' '}
-                </NavLink>{' '} */}
                 <NavLink>
                   <Link to="/layout">Layout</Link>
                 </NavLink>
