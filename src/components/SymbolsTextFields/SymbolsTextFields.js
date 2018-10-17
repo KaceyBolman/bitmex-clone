@@ -130,6 +130,12 @@ class SymbolsTextFields extends React.Component {
     console.log('Show symbols? ' + this.state.displaySymbols);
   };
 
+  displaySpecificSymbols = arrayOfSymbols => {
+    arrayOfSymbols.forEach(function(symbol) {
+      console.log(symbol);
+    });
+  };
+
   /**
    * Generate the Symbols chosen in a list.
    *
@@ -151,21 +157,35 @@ class SymbolsTextFields extends React.Component {
     for (var i = 0; i < 3; i++) {
       text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
-    console.log('Key generated: ' + text);
+    // console.log('Key generated: ' + text);
     return text;
+  };
+
+  removeSymbol = symbol => {
+    console.log('clicked removeSymbol');
+    let newArray = this.state.chosenSymbols;
+    console.log('Printing new array: ');
+    newArray = newArray.filter(item => !symbol.includes(symbol));
+    this.displaySpecificSymbols(newArray);
   };
 
   render() {
     let renderedSymbols = null;
 
-    console.log('displaySymbols is currently ' + this.state.displaySymbols);
+    // console.log('displaySymbols is currently ' + this.state.displaySymbols);
     if (this.state.displaySymbols) {
-      console.log('Entered :');
+      // console.log('Entered :');
       renderedSymbols = (
         <div>
           {this.state.chosenSymbols.map((symbol, index) => {
-            console.log(symbol.label);
-            return <Symbol key={this.generateSingleSymbol()} label={symbol} />;
+            // console.log(symbol);
+            return (
+              <Symbol
+                onClick={this.removeSymbol}
+                key={this.generateSingleSymbol()}
+                label={symbol}
+              />
+            );
           })}
         </div>
       );
