@@ -7,7 +7,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import _ from 'lodash';
 
 import Symbol from '../Symbol/Symbol';
 
@@ -95,11 +94,11 @@ class SymbolsTextFields extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.pushSymbols = this.pushSymbols.bind(this);
-    this.clogSymbols = this.clogSymbols.bind(this);
+    this.pushSymbol = this.pushSymbol.bind(this);
     this.displaySymbols = this.displaySymbols.bind(this);
-    this.generateSymbols = this.generateSymbols.bind(this);
+    this.displaySpecificSymbols = this.displaySpecificSymbols.bind(this);
     this.generateSingle = this.generateSingleSymbol.bind(this);
+    this.removeSymbol = this.removeSymbol.bind(this);
   }
 
   handleChange = name => event => {
@@ -108,47 +107,39 @@ class SymbolsTextFields extends React.Component {
     });
   };
 
-  pushSymbols = () => {
+  pushSymbol = () => {
     this.setState({
       chosenSymbols: [...this.state.chosenSymbols, this.state.label],
     });
-    console.log('Pushed ' + this.state.label + ' to state');
-    this.clogSymbols();
   };
 
-  clogSymbols = () => {
-    this.state.chosenSymbols.forEach(function(symbol) {
-      console.log(symbol);
-    });
-  };
-
+  // toggle whether the list of chosen symbols is shown
+  // toggled by hitting 'Done' button in web app
   displaySymbols = () => {
     this.setState({
       displaySymbols: !this.state.displaySymbols,
     });
-    console.log('chosenSymbols.length = ' + this.state.chosenSymbols.length);
-    console.log('Show symbols? ' + this.state.displaySymbols);
   };
 
-  displaySpecificSymbols = arrayOfSymbols => {
-    arrayOfSymbols.forEach(function(symbol) {
-      console.log(symbol);
-    });
-  };
-
-  /**
-   * Generate the Symbols chosen in a list.
-   *
-   * @memberof TextFields
-   */
-  generateSymbols = () => {
-    let totalSymbols = 30;
+  displaySpecificSymbols(arrayOfSymbols) {
+    let length = arrayOfSymbols.length;
     let index = 0;
-    while (index < totalSymbols) {
-      console.log(this.generateSingleSymbol());
-      index++;
+
+    while (index < length) {
+      console.log(arrayOfSymbols[index++]);
     }
-  };
+  }
+
+  removeSymbol(symbol) {
+    let newArray = this.state.chosenSymbols;
+    let indexToRemove = newArray.indexOf(symbol);
+    if (indexToRemove > -1) {
+      newArray.splice(indexToRemove, 1);
+    }
+    this.setState({
+      chosenSymbols: newArray,
+    });
+  }
 
   generateSingleSymbol = function() {
     let text = '';
@@ -159,14 +150,6 @@ class SymbolsTextFields extends React.Component {
     }
     // console.log('Key generated: ' + text);
     return text;
-  };
-
-  removeSymbol = symbol => {
-    console.log('clicked removeSymbol');
-    let newArray = this.state.chosenSymbols;
-    console.log('Printing new array: ');
-    newArray = newArray.filter(item => !symbol.includes(symbol));
-    this.displaySpecificSymbols(newArray);
   };
 
   render() {
@@ -180,11 +163,9 @@ class SymbolsTextFields extends React.Component {
           {this.state.chosenSymbols.map((symbol, index) => {
             // console.log(symbol);
             return (
-              <Symbol
-                onClick={this.removeSymbol}
-                key={this.generateSingleSymbol()}
-                label={symbol}
-              />
+              <div onClick={() => this.removeSymbol(symbol)} key={this.generateSingleSymbol()}>
+                <Symbol label={symbol} />
+              </div>
             );
           })}
         </div>
@@ -220,7 +201,7 @@ class SymbolsTextFields extends React.Component {
             variant="contained"
             color="primary"
             className={classes.button}
-            onClick={this.pushSymbols}
+            onClick={this.pushSymbol}
           >
             Enter Symbol
           </Button>
