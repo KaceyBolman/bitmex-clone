@@ -7,6 +7,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import DeleteIcon from '@material-ui/icons/Delete';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 import Symbol from '../Symbol/Symbol';
 
@@ -39,6 +45,12 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: 200,
+  },
+  demo: {
+    backgroundColor: theme.palette.background.paper,
+  },
+  title: {
+    margin: `${theme.spacing.unit * 4}px 0 ${theme.spacing.unit * 2}px`,
   },
 });
 ``; //
@@ -91,6 +103,8 @@ class SymbolsTextFields extends React.Component {
       label: 'EUR',
       chosenSymbols: [],
       displaySymbols: false,
+      dense: false,
+      secondary: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -163,8 +177,9 @@ class SymbolsTextFields extends React.Component {
           {this.state.chosenSymbols.map((symbol, index) => {
             // console.log(symbol);
             return (
-              <div onClick={() => this.removeSymbol(symbol)} key={this.generateSingleSymbol()}>
-                <Symbol label={symbol} />
+              <div key={this.generateSingleSymbol()}>
+                {/* <div key={this.generateSingleSymbol()}> */}
+                <Symbol label={symbol} removeFunction={() => this.removeSymbol(symbol)} />
               </div>
             );
           })}
@@ -175,46 +190,50 @@ class SymbolsTextFields extends React.Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <form className={classes.container} noValidate autoComplete="off">
-          <TextField
-            id="standard-select-currency"
-            select
-            label="Select"
-            className={classes.textField}
-            value={this.state.label}
-            onChange={this.handleChange('label')}
-            SelectProps={{
-              MenuProps: {
-                className: classes.menu,
-              },
-            }}
-            helperText="Please select your currency"
-            margin="normal"
-          >
-            {symbols.map(option => (
-              <MenuItem key={option.label} value={option.label}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            onClick={this.pushSymbol}
-          >
-            Enter Symbol
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            onClick={this.displaySymbols}
-          >
-            Done
-          </Button>
-        </form>
-        {renderedSymbols}
+        <Grid xs={6} md={6}>
+          <form className={classes.container} noValidate autoComplete="off">
+            <TextField
+              id="standard-select-currency"
+              select
+              label="Select"
+              className={classes.textField}
+              value={this.state.label}
+              onChange={this.handleChange('label')}
+              SelectProps={{
+                MenuProps: {
+                  className: classes.menu,
+                },
+              }}
+              helperText="Please select your currency"
+              margin="normal"
+            >
+              {symbols.map(option => (
+                <MenuItem key={option.label} value={option.label}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={this.pushSymbol}
+            >
+              Enter Symbol
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={this.displaySymbols}
+            >
+              Done
+            </Button>
+          </form>
+        </Grid>
+        <Grid item xs={4} md={4} lg={4}>
+          <List>{renderedSymbols}</List>
+        </Grid>
       </div>
     );
   }

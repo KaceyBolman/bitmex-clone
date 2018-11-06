@@ -6,11 +6,15 @@ import App from './App';
 
 import SymbolsTextFields from './components/SymbolsTextFields/SymbolsTextFields';
 
+// import InteractiveList from './components/InteractiveList/InteractiveList';
+import Symbol from './components/Symbol/Symbol';
+
 import '../node_modules/react-grid-layout/css/styles.css';
 import '../node_modules/react-resizable/css/styles.css';
 import 'typeface-roboto';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+// ReactDOM.render(<SymbolsTextFields />, document.getElementById('root'));
 ReactDOM.render(<SymbolsTextFields />, document.getElementById('root'));
 
 // ReactDOM.render (
